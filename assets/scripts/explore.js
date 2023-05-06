@@ -10,10 +10,10 @@ function init() {
   const synth = window.speechSynthesis;
   var text = document.getElementById("text-to-speak")
   const button = document.querySelector("button")
-  
-  
-  
-  // Add avaiable voices to drop-down menu
+  var image = document.querySelector("img")
+  //const isSpeaking = synth.speaking
+
+  // Add available voices to drop-down menu
   function populateVoiceList() {
     if (typeof speechSynthesis === "undefined") {
       return;
@@ -54,6 +54,14 @@ function init() {
       }
     }
     synth.speak(utterThis);
+    if (synth.speaking) {
+        image.src = "assets/images/smiling-open.png"
+    }
+    
+    utterThis.addEventListener("end", (event) => {
+      image.src = "assets/images/smiling.png"
+    })
+    
   })
 
 }
